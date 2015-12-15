@@ -1,0 +1,128 @@
+/**
+ * Site header
+ */
+.site-header {
+  background-color: #fff;
+  width: 100%;
+  border-bottom: 1px solid $grey-color-light;
+  min-height: 56px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.site-title {
+  font-family:'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  line-height: 56px;
+  float: left;
+  color: #333 !important;
+  &:hover {
+    color: #828282 !important;
+  }
+}
+
+.site-nav {
+  float: right;
+  line-height: 56px;
+
+  .page-link {
+    color: #828282;
+    line-height: $base-line-height;
+    transition: all .3s ease;
+    // Gaps between nav items, but not on the last one
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    &:hover {
+      color: $brand-color;
+      .icon {
+        > svg {
+          path {
+            fill: $brand-color;
+          }
+        }
+      }
+    }
+
+
+  }
+}
+
+/**
+ * Page content
+ */
+.page-content {
+  padding-top: 66px;
+
+}
+
+.page-heading {
+  font-size: 20px;
+}
+
+.pagination-wrap {
+  border-top: solid 1px $grey-color-light;
+  text-align: center;
+  .pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 10px 0;
+
+    > li {
+      display: inline; // Remove list-style and block-level defaults
+      > a,
+      > span {
+        position: relative;
+        float: left; // Collapse white-space
+        padding: 1px 6px;
+        text-decoration: none;
+        color: $brand-color;
+        margin-left: -1px;
+      }
+      &:first-child {
+        > a,
+        > span {
+          margin-left: 0;
+        }
+      }
+    }
+
+    > li > a,
+    > li > span {
+      &:hover,
+      &:focus {
+        z-index: 3;
+        color: #828282;
+      }
+    }
+
+    > .active > a,
+    > .active > span {
+      &,
+      &:hover,
+      &:focus {
+        z-index: 2;
+        color: #fff;
+        background-color: $brand-color;
+        cursor: default;
+      }
+    }
+
+    > .disabled {
+      > span,
+      > span:hover,
+      > span:focus,
+      > a,
+      > a:hover,
+      > a:focus {
+        color: #999;
+        cursor: default;
+      }
+    }
+  }
+}

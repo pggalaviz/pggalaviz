@@ -1,0 +1,62 @@
+---
+layout: blog
+title: Blog · Pedro G. Galaviz
+---
+
+<div id="blog">
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+  <h1>Blog</h1>
+
+  <ul class="post-list">
+    {% for post in paginator.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url }}">{{ post.title }}</a>
+        </h2>
+        {{ post.excerpt }}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <!-- Pagination links -->
+  <nav class="pagination-wrap">
+    <ul class="pagination">
+        {% if paginator.previous_page %}
+        <li>
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo; prev</span>
+            </a>
+        </li>
+        {% endif %}
+
+        {% for page in (1..paginator.total_pages) %}
+            {% if page == paginator.page %}
+            <li class="active">
+                <a href="#">{{ page }}</a>
+            </li>
+            {% elsif page == 1 %}
+            <li>
+                <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if paginator.next_page %}
+        <li>
+            <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Next">
+                <span aria-hidden="true">next &raquo;</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+</div>
