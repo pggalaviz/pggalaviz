@@ -1,0 +1,40 @@
+---
+layout: default
+title: Posts by Tag · Pedro G. Galaviz
+---
+<div id="tags">
+
+  <h1>Tags</h1>
+
+  <ul class="tags-all">
+    {% for tag in site.tags %}
+      {% assign t = tag | first %}
+      {% assign posts = tag | last %}
+      <li><a href="#{{t | downcase | replace:",",""}}">{{t | downcase | replace:" ","-" }}</a></li>
+    {% endfor %}
+  </ul>
+
+  <h1>Posts by Tags</h1>
+
+  {% for tag in site.tags %}
+    {% assign t = tag | first %}
+    {% assign posts = tag | last %}
+
+      <section id="{{ t | downcase | replace:",",""}}">
+        <h3>{{ t | capitalize | replace:",",""}}</h3>
+        <ul class="tag">
+        {% for post in posts %}
+          {% if post.tags contains t %}
+          <li>
+            <p class="date">{{ post.date | date: "%B %-d, %Y"  }}</p>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+      </section>
+
+
+  {% endfor %}
+
+</div>
