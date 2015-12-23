@@ -25,7 +25,7 @@ This is a very basic server configuration, there are multiple steps to secure ou
 
 Conect to your server, log as the `root` user using the following command (substitute the highlighted word with your server's public IP address):
 
-{% highlight shell %}
+{% highlight config %}
 ssh root@SERVER_IP_ADDRESS
 {% endhighlight %}
 
@@ -35,13 +35,13 @@ Complete the login process by accepting the warning about host authenticity if i
 
 This example creates a new user called "pggalaviz", but you should replace it with a user name that you like:
 
-{% highlight shell %}
+{% highlight config %}
 adduser pggalaviz
 {% endhighlight %}
 
 Next, assign a password to the new user (again, substitute "pggalaviz" with the user that you just created):
 
-{% highlight shell %}
+{% highlight config %}
 passwd pggalaviz
 {% endhighlight %}
 
@@ -49,7 +49,7 @@ Enter a strong password, and repeat it again to verify it.
 We have a new user account with regular account privileges. However, we need to do administrative tasks.
 As root, run this command to add your new user to the wheel group (substitute the highlighted word with your new user):
 
-{% highlight shell %}
+{% highlight config %}
 gpasswd -a pggalaviz wheel
 {% endhighlight %}
 
@@ -59,40 +59,40 @@ Now your user can run commands with super user privileges!
 
 If you don't have a public key already, generate one by running this command at the terminal of your local machine (your computer not the server)!
 
-{% highlight shell %}
+{% highlight config %}
 ssh-keygen
 {% endhighlight %}
 
 Press 'return key' to accept (don't modify the path) and add a password to your keys (this last step is optional).
 If you already had or you just created your keys run this command on your local machine to print your public key (id_rsa.pub):
 
-{% highlight shell %}
+{% highlight config %}
 cat ~/.ssh/id_rsa.pub
 {% endhighlight %}
 
 it should print something like this:
 
-{% highlight shell %}
+{% highlight config %}
 ssh-rsa AAAAB3N.......zaC1yc2 localuser@machine.local
 {% endhighlight %}
 
 Select it all and copy it to the clipboard.
 On the server as the root user enter this command to switch to the user we created at the begining of this tutorial:
 
-{% highlight shell %}
+{% highlight config %}
 su - pggalaviz
 {% endhighlight %}
 
 Now we're going to create a folder named .ssh and change its permissions for security reasons:
 
-{% highlight shell %}
+{% highlight config %}
 mkdir .ssh
 chmod 700 .ssh
 {% endhighlight %}
 
 Create a new file by running:
 
-{% highlight shell %}
+{% highlight config %}
 vi .ssh/authorized_keys
 {% endhighlight %}
 
@@ -100,19 +100,19 @@ Enter 'insert' mode by pressing `i` and paste your previoulsy copied ssh key. pr
 
 Change the file permissions:
 
-{% highlight shell %}
+{% highlight config %}
 chmod 600 .ssh/authorized_keys
 {% endhighlight %}
 
 and return to the root user by running:
 
-{% highlight shell %}
+{% highlight config %}
 exit
 {% endhighlight %}
 
 Now, you'll be able to login to your server by running something like
 
-{% highlight shell %}
+{% highlight config %}
 ssh pggalaviz@SERVER_IP_ADDRESS
 {% endhighlight %}
 
@@ -120,7 +120,7 @@ ssh pggalaviz@SERVER_IP_ADDRESS
 
 Log in to your server using your user (not root) and open the SSH configuration file by running:
 
-{% highlight shell %}
+{% highlight config %}
 vi /etc/ssh/sshd_config
 {% endhighlight %}
 
@@ -134,7 +134,7 @@ Enter insert mode by pressing `i` and edit the line so it looks like `PermitRoot
 
 Press `:x` and enter to save changes and then run the following command to reload SSH.
 
-{% highlight shell %}
+{% highlight config %}
 sudo systemctl reload sshd.service
 {% endhighlight %}
 
@@ -146,13 +146,13 @@ ___
 
 First install the EPEL package:
 
-{% highlight shell %}
+{% highlight config %}
 sudo yum install epel-release
 {% endhighlight %}
 
 Then you should confirm that all packages are updated by running:
 
-{% highlight shell %}
+{% highlight config %}
 sudo yum update
 {% endhighlight %}
 
@@ -160,7 +160,7 @@ sudo yum update
 
 Install all the packages needed such as gcc, make, git, binutils, etc.
 
-{% highlight shell %}
+{% highlight config %}
 sudo yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel curl-devel
 {% endhighlight %}
 
@@ -168,7 +168,7 @@ sudo yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-dev
 
 We'll use 'rbenv' to install and manage Ruby versions, just run these commands:
 
-{% highlight shell %}
+{% highlight config %}
 cd
 git clone git://github.com/sstephenson/rbenv.git .rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
@@ -186,38 +186,38 @@ If nothing appears then logout from the server, log in again using ssh and run `
 
 Now we'll install Ruby:
 
-{% highlight shell %}
+{% highlight config %}
 rbenv install -v 2.2.2
 {% endhighlight %}
 
 This will install Ruby version 2.2.2, this can take some minutes.
-After install let's set the default version our shell will use by running:
+After install let's set the default version our config will use by running:
 
-{% highlight shell %}
+{% highlight config %}
 rbenv global 2.2.2
 {% endhighlight %}
 
 Finally let's verify ruby was installed properly with this command:
 
-{% highlight shell %}
+{% highlight config %}
 ruby -v
 {% endhighlight %}
 
 After ruby is installed run this command to install gems without documentation and save yourself some time and disk usage:
 
-{% highlight shell %}
+{% highlight config %}
 echo "gem: --no-document" > ~/.gemrc
 {% endhighlight %}
 
 Now lets install some basic gems:
 
-{% highlight shell %}
+{% highlight config %}
 gem install bundler rack sinatra unicorn
 {% endhighlight %}
 
 Whenever you install a new version of Ruby or a gem that provides commands, you should run the rehash sub-command. This will install shims for all Ruby executables known to rbenv, which will allow you to use the executables:
 
-{% highlight shell %}
+{% highlight config %}
 rbenv rehash
 {% endhighlight %}
 
@@ -227,7 +227,7 @@ ___
 
 Just for this tutorial lets create a simple sinatra app.
 
-{% highlight shell %}
+{% highlight config %}
 cd
 mkdir sample_app
 cd sample_app
@@ -235,7 +235,7 @@ cd sample_app
 
 We'll use Sinatra's modular style, start by creating the following archives and folders inside our sample_app folder:
 
-{% highlight shell %}
+{% highlight config %}
 assets
   |_ css
       |_app.scss
@@ -344,7 +344,7 @@ Inside the views/home.erb lets add:
 
 Finally on app's directory run:
 
-{% highlight shell %}
+{% highlight config %}
 bundle install
 {% endhighlight %}
 
@@ -354,7 +354,7 @@ ___
 
 Now we need to configure Unicorn to serve our app.
 
-{% highlight shell %}
+{% highlight config %}
 cd
 cd sample_app
 vi unicorn.rb
@@ -362,7 +362,7 @@ vi unicorn.rb
 
 And copy this inside the file:
 
-{% highlight shell %}
+{% highlight config %}
 root = "/home/pggalaviz/sample_app"
 worker_processes 2
 working_directory root
@@ -379,13 +379,13 @@ listen "#{root}/tmp/sockets/sample_app.sock"
 
 Now we'll create an init script so we can manage our unicorn server.
 
-{% highlight shell %}
+{% highlight config %}
 sudo vi /etc/init.d/unicorn_sample_app
 {% endhighlight %}
 
 And inside this file we'll add:
 
-```shell
+```config
 #!/bin/sh
 
 ### BEGIN INIT INFO
@@ -460,14 +460,14 @@ Check that you change `# app settings` to your app and user data.
 
 Save and exit the file. Now to enable unicorn to start on boot lets run:
 
-{% highlight shell %}
+{% highlight config %}
 sudo chmod 755 /etc/init.d/unicorn_sample_app
 sudo chkconfig --levels 235 unicorn_sample_app on
 {% endhighlight %}
 
 Lets start our Unicorn server now:
 
-{% highlight shell %}
+{% highlight config %}
 sudo service unicorn_sample_app start
 {% endhighlight %}
 
@@ -479,13 +479,13 @@ ___
 
 First we need to install Nginx to our server. Just run:
 
-{% highlight shell %}
+{% highlight config %}
 sudo yum install nginx
 {% endhighlight %}
 
 next, we'll enable it to start on server boot:
 
-{% highlight shell %}
+{% highlight config %}
 sudo chkconfig --levels 235 nginx on
 {% endhighlight %}
 
@@ -493,13 +493,13 @@ sudo chkconfig --levels 235 nginx on
 
 First we'll open the nginx configuration file by running:
 
-{% highlight shell %}
+{% highlight config %}
 sudo vi /etc/nginx/nginx.conf
 {% endhighlight %}
 
 Then change its content to look like the one below.
 
-```shell
+```
 user  pggalaviz;
 worker_processes  auto;
 
@@ -529,13 +529,13 @@ http {
 
 Check you changed the user to yours. Now let's create our server file:
 
-{% highlight shell %}
+{% highlight config %}
 sudo vi /etc/nginx/conf.d/sample_app.conf
 {% endhighlight %}
 
 and lets add this content:
 
-```shell
+{% highlight nginx %}
 upstream sample_app_x {
   server unix:/home/pggalaviz/sample_app/tmp/sockets/sample_app.sock fail_timeout=0;
 }
@@ -559,12 +559,12 @@ server {
     client_max_body_size 4G;
     keepalive_timeout 10;
 }
-```
+{% endhighlight %}
 
 Change to match your user and app's data. Save and exit.
 Now let's start our nginx server by running:
 
-{% highlight shell %}
+{% highlight config %}
 sudo service nginx start
 {% endhighlight %}
 
@@ -584,13 +584,13 @@ For each app you'll need to create a "unicorn.rb" file inside the app's folder t
 
 you can start any unicorn process by typing:
 
-{% highlight shell %}
+{% highlight config %}
 sudo service unicorn_sample_app start
 {% endhighlight %}
 
 If you are updating your app first pull the repo code from git to your app's folder and then type:
 
-{% highlight shell %}
+{% highlight config %}
 sudo service unicorn_sample_app restart
 sudo service nginx restart
 {% endhighlight %}
