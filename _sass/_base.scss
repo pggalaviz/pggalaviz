@@ -78,7 +78,23 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: $base-font-weight;
 }
 
+h2 {
+  font-weight: bolder;
+}
 
+h3 {
+  text-transform: uppercase;
+  font-size: 18px;
+  text-decoration: underline;
+  color: $grey-color;
+}
+
+hr {
+  border: 0;
+  height: 0;
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+}
 
 /**
  * Links
@@ -124,7 +140,7 @@ blockquote {
  */
 pre,
 code {
-  font-size: 15px;
+  font-size: 14px;
   border: 1px solid $grey-color-light;
   border-radius: 3px;
   background-color: #f5f5f5;
@@ -135,7 +151,7 @@ code {
 }
 
 pre {
-    padding: 8px 12px;
+    padding: 3px 9px;
     overflow-x: auto;
 
     > code {
@@ -188,7 +204,7 @@ pre {
     width: 16px;
     height: 16px;
     vertical-align: middle;
-    
+
     path {
       transition: all .3s ease;
       fill: $grey-color;
