@@ -94,7 +94,9 @@
 
 .post-tags {
   padding-top: 10px;
+  padding-bottom: 10px;
   border-top: 1px solid $grey-color-light;
+  border-bottom: 1px solid $grey-color-light;
   h4 {
     font-size: 13px;
     font-weight: bold;
@@ -115,11 +117,19 @@
 .post-nav {
   display: block;
   overflow: hidden;
-  font-size: 12px;
+  font-size: 11px;
+  margin-bottom: 30px;
+  text-align: center;
   .prev {
+    border: 2px solid $brand-color;
+    width: 48%;
+    padding: 6px 20px;
     float: left;
   }
   .next {
+    border: 2px solid $brand-color;
+    width: 48%;
+    padding: 6px 20px;
     float: right;
   }
 }

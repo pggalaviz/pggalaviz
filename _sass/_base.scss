@@ -99,14 +99,10 @@ hr {
 /**
  * Links
  */
-a {
+a, a:visited {
   color: $brand-color;
   text-decoration: none;
   transition: color .3s ease;
-
-  &:visited {
-    color: darken($brand-color, 15%);
-  }
 
   &:hover {
     color:#666;

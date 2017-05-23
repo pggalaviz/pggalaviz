@@ -12,7 +12,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Music, code & things in between...
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://pggalaviz.com" # the base hostname & protocol for your site
-twitter_username: pedroggalaviz
+twitter_username: pggalaviz
 github_username:  pggalaviz
 timezone: America/Mexico_City
 permalink: pretty
