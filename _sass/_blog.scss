@@ -124,12 +124,20 @@
     border: 2px solid $brand-color;
     width: 48%;
     padding: 6px 20px;
+    transition: all .3s ease;
     float: left;
+  }
+  .prev:hover {
+    border: 2px solid $grey-color-light
   }
   .next {
     border: 2px solid $brand-color;
     width: 48%;
     padding: 6px 20px;
+    transition: all .3s ease;
     float: right;
+  }
+  .next:hover {
+    border: 2px solid $grey-color-light
   }
 }
