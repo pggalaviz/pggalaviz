@@ -2,7 +2,7 @@
 layout: post
 title:  "Configuring a Phoenix app with Vue.js & Webpack"
 author: Pedro G. Galaviz
-date:   2017-05-23 12:00:00 -0600
+date:   2017-05-28 12:00:00 -0600
 comments: true
 tags: "elixir, phoenix, vue, webpack"
 ---
