@@ -358,16 +358,19 @@ artifacts' section and add the following:
 /assets/.tern-port
 {% endhighlight %}
 
-Next we're going to edit the `config/dev.exs` file:
+Next we're going to edit the `config/dev.exs` file, let's add this to the watchers section:
 
 {% highlight elixir %}
 # ...
   watchers: [
-    node: ["node_modules/.bin/webpack-dev-server", "--inline", "--colors", "--hot", "--stdin", "--host", "localhost", "--port", "8080", "--public", "localhost:8080",
+    node: ["node_modules/.bin/webpack", "--colors", "--watch-stdin", "--progress",
            cd: Path.expand("../assets", __DIR__)]
   ]
 # ...
 {% endhighlight %}
+
+This way we can watch changes on the **assets** folder and recomplie with webpack using Phoenix's
+hot reaload functionality.
 
 That's it for config, now lets update our Phoenix views:
 
@@ -393,8 +396,10 @@ And the `templates/page/index.html.eex` file to simply show:
 <div id="app"></div>
 {% endhighlight %}
 
-And that's it! If we go to the project root path and run `iex -S mix phx.server` we would se our
+And that's it! If we go to the project root path and run `iex -S mix phx.server` we will see our
 Vue.js content served by Phoenix.
+
+You can find a working example here: [https://github.com/pggalaviz/phoenix-vue](https://github.com/pggalaviz/phoenix-vue).
 
 
 
