@@ -120,24 +120,29 @@
   font-size: 11px;
   margin-bottom: 30px;
   text-align: center;
-  .prev {
+  vertical-align: middle;
+
+  .prev, .next {
     border: 2px solid $brand-color;
-    width: 48%;
-    padding: 6px 20px;
+    width: 45%;
+    height: 20px;
+    max-width: 45%;
+    padding: 6px 10px;
+    vertical-align: middle;
     transition: all .3s ease;
+    @include media-query($on-palm) {
+        height: 35px;
+        width: 42%;
+        max-width: 42%;
+    }
+  }
+  .prev {
     float: left;
   }
-  .prev:hover {
-    border: 2px solid $grey-color-light
-  }
   .next {
-    border: 2px solid $brand-color;
-    width: 48%;
-    padding: 6px 20px;
-    transition: all .3s ease;
     float: right;
   }
-  .next:hover {
+  .prev:hover, .next:hover {
     border: 2px solid $grey-color-light
   }
 }
