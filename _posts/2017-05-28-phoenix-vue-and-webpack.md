@@ -15,7 +15,7 @@ Webpack so we'll use it.
 
 ## Getting started
 
-To get this settings you should have Phoenix version **~1.3** installed. I you don't have it, at the
+To get this settings you should have Phoenix version **~1.3** installed. If you don't have it, at the
 moment of this writing, you can just run:
 
 {% highlight shell %}
@@ -125,8 +125,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 // Environment
-const Env = process.env.MIX_ENV || 'development'
-const isProd = (Env === 'production')
+const Env = process.env.MIX_ENV || 'dev'
+const isProd = (Env === 'prod')
 
 function resolve (dir) {
   return path.join(__dirname, dir)
@@ -237,6 +237,10 @@ module.exports = (env) => {
   }
 }
 {% endhighlight %}
+
+Basically we're declaring our app's entry point `./src/main.js` and exporting everything to the
+`priv/static` folder of our project root path. We're also extracting all styles from Vue components
+files to a single css file. Basic support for images and font files is also added.
 
 Go to the **src** directory and create the **components** folder and some files:
 
