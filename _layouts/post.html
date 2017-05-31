@@ -33,7 +33,7 @@ comments: true
       {% for tag in page.tags %}
 
         <li>
-          <a class="post-tag" href="/tag/#{{ tag | downcase | slugify }}">{{ tag }}</a>
+          <a class="post-tag" href="/blog/tags#{{ tag | downcase | slugify }}">{{ tag | capitalize }}</a>,
         </li>
 
       {% endfor %}

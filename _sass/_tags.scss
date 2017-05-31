@@ -1,4 +1,6 @@
 #tags {
+  margin-bottom: 50px;
+
   h1 {
     font-family:'Montserrat', 'Helvetica Neue', Arial, sans-serif;
     font-weight:700;
@@ -8,12 +10,16 @@
   }
   h3 {
     font-weight: bolder;
+    text-decoration: none;
   }
   section {
-    padding-top: 15px;
+    padding-top: 5px;
   }
   section + section {
     border-top: 1px solid $grey-color-light;
+  }
+  .tag-hook {
+    height: 60px;
   }
   .tags-all {
     list-style: none;
@@ -22,7 +28,7 @@
     li {
       display: inline;
       padding: 0;
-      margin: 0;
+      margin-right: 4px;
     }
   }
   .tag {

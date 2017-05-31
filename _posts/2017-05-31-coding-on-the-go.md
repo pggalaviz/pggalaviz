@@ -4,7 +4,7 @@ title:  "Coding on the go"
 author: Pedro G. Galaviz
 date:   2017-05-31 12:00:00 -0600
 comments: true
-tags: "personal, productivity, coding"
+tags: [personal, productivity, coding]
 ---
 
 This post is special, it was completely typed from my iPhone. It's been about 2 years since I don't have a laptop. Even I own a 27 inch 5k iMac (which is the perfect workstation for me) I have a lack of mobility, but this is over.

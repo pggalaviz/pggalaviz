@@ -4,7 +4,7 @@ title:  "Run multiple Sinatra apps on a single server (CentOS 7)"
 author: Pedro G. Galaviz
 date:   2017-05-22 12:00:00 -0600
 comments: true
-tags: "ruby, sinatra, centos"
+tags: [ ruby, sinatra, centos ]
 ---
 
 There's a considerable lack of information about rack apps deployment other than Ruby on Rails, so I made this small tutorial for deploying Sinatra apps to CentOS 7 servers.
