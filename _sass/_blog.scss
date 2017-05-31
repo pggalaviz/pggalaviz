@@ -32,6 +32,14 @@
     font-weight: bolder;
     text-transform: uppercase;
   }
+  .index-tags {
+    font-size: 10px;
+    margin-left: 0;
+    list-style: none;
+    li {
+        display: inline;
+    }
+  }
 }
 
 /**
@@ -117,23 +125,22 @@
 .post-nav {
   display: block;
   overflow: hidden;
-  font-size: 11px;
+  font-size: 14px;
   margin-bottom: 30px;
   text-align: center;
   vertical-align: middle;
 
   .prev, .next {
     border: 2px solid $brand-color;
-    width: 45%;
-    height: 20px;
-    max-width: 45%;
+    width: 43%;
+    max-width: 43%;
+    height: 25px;
     padding: 6px 10px;
     vertical-align: middle;
     transition: all .3s ease;
     @include media-query($on-palm) {
-        height: 35px;
-        width: 42%;
-        max-width: 42%;
+        width: 40%;
+        max-width: 40%;
     }
   }
   .prev {

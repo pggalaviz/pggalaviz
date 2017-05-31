@@ -10,7 +10,13 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
 
+  {%if page.tags %}
+    <meta name="keywords" content="{{ page.tags | join: ', ' | escape }}"/>
+  {%endif %}
+  <!-- Open Graph -->
   <meta content="{{ site.title }}" property="og:site_name">
+  <meta content="Pedro G. Galaviz" property="og:site_author">
+  <meta content="/assets/img/pggalaviz.jpg" property="og:image">
 
   {% if page.title %}
     <meta content="{{ page.title }}" property="og:title">
@@ -39,5 +45,24 @@
       <meta content="{{ tag }}" property="article:tag">
     {% endfor %}
   {% endif %}
+
+  <!-- Twitter cards -->
+    <meta name="twitter:image:src" content="/assets/img/pggalaviz.jpg">
+  {% if page.title %}
+    <meta name="twitter:title" content="{{ page.title }}">
+  {% else %}
+    <meta name="twitter:title" content="{{ site.title }}">
+  {% endif %}
+
+  {% if page.url %}
+    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+  {% endif %}
+
+  {% if page.excerpt %}
+    <meta name="twitter:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 240}}">
+  {% else %}
+    <meta name="twitter:description" content="{{site.description}}">
+  {% endif %}
+
 
 </head>

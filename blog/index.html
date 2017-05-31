@@ -18,6 +18,12 @@ title: Blog
           <a class="post-link" href="{{ post.url }}">{{ post.title }}</a>
         </h2>
         {{ post.excerpt }}
+        <ul class="index-tags">
+          <li>Tags:</li>
+          {% for tag in post.tags %}
+            <li><a href="/blog/tags#{{tag | downcase | slugify}}">{{tag | capitalize}}</a>,</li>
+          {% endfor %}
+        </ul>
       </li>
     {% endfor %}
   </ul>
