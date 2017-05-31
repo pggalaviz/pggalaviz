@@ -16,7 +16,7 @@
   <!-- Open Graph -->
   <meta content="{{ site.title }}" property="og:site_name">
   <meta content="Pedro G. Galaviz" property="og:site_author">
-  <meta content="/assets/img/pggalaviz.jpg" property="og:image">
+  <meta content="{{site.url}}/assets/img/pggalaviz.jpg" property="og:image">
 
   {% if page.title %}
     <meta content="{{ page.title }}" property="og:title">
@@ -47,7 +47,7 @@
   {% endif %}
 
   <!-- Twitter cards -->
-    <meta name="twitter:image:src" content="/assets/img/pggalaviz.jpg">
+    <meta name="twitter:image:src" content="{{site.url}}/assets/img/pggalaviz.jpg">
   {% if page.title %}
     <meta name="twitter:title" content="{{ page.title }}">
   {% else %}
