@@ -17,7 +17,11 @@
     list-style: none;
 
     > li {
-      margin-bottom: $spacing-unit;
+      margin-bottom: 15px;
+      padding-top: 15px;
+      &:not(:first-child) {
+        border-top: 1px solid $grey-color-light;
+      }
     }
   }
 
