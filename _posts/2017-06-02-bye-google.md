@@ -21,7 +21,7 @@ negatively affected by third party trackers and advertising networks.
 
 For several years I've seen an increasing number of bad decisions from Google that directly
 affects the end user's privacy. Some days ago Google announced it will start tracking even the purchases you
-make offline, the ones you make by sweeping your card on a physical store, this with the purpose of giving advertisers insights (and who knows what else) about Google's ads campaigns and how they affect user's behaviour.
+make offline, those you make by sweeping your card on a physical store, this with the purpose of giving advertisers insights (and who knows what else) about Google's ads campaigns and how they affect user's behaviour.
 
 Also recently, it announced that next versions of Chrome will have a default ads blocker. Wait!
 What? A company whose biggest revenue share comes from advertising will add an ads blocker to their own
