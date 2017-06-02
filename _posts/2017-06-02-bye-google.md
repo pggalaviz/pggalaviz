@@ -9,13 +9,13 @@ tags: [personal, privacy]
 
 For years I've been an avid Google product user: Chrome as my main browser, for development
 &amp; daily usage, 2 email accounts on Gmail, Google maps for traversing the city, Drive for file
-sharing, and so on. But I'm done! Why? I vaule my privacy.
+sharing, and so on. But I'm done! Why? I value my privacy.
 
 It's no surprise nor a secret that Google tracks you, everybody knows that (or should know). But most people, including myself, didn't gave to much importance to this. It knows what sites you visited, what you searched for, where you are, your routines and much more.
 
 <i>"Come on! Google knows where I live and it always knows what's the best route to take home after work, it just makes your life easier, plus it's free!" - Naive average user.</i>
 
-Did you know prices on ticket planes will appear higher for you if you previously searched and there's
+Did you know prices on plane tickets will appear higher for you if you previously searched and there's
 info about that on your browser? This is just one example of how you, the end user, are
 negatively affected by third party trackers and advertising networks.
 
