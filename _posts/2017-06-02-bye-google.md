@@ -84,6 +84,6 @@ I'm not telling you to stop using all Google's products, this is my personal vie
 now. I just don't like the way this company is doing things and I value my privacy.
 
 There are a lot of steps besides these to secure our privacy online (and offline), and I think people should be aware and
-give the importance it needs, especially when many of our life is spent on the web.
+give the importance it needs, especially when a big part of our life is spent on the web.
 
 
