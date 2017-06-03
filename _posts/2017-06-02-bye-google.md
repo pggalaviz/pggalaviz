@@ -11,7 +11,7 @@ For years I've been an avid Google product's user: Chrome as my main browser, fo
 &amp; daily usage, 2 email accounts on Gmail, Google maps for traversing the city, Drive for file
 sharing, and so on. But I'm done! Why? I value my privacy.
 
-It's no surprise nor a secret that Google tracks you, everybody knows that (or should know). But most people, including myself, didn't gave to much importance to this. It knows what sites you visited, what you searched for, where you are, your routines and much more.
+It's no surprise nor a secret that Google tracks you, everybody knows that (or should know). But most people, including myself, didn't give too much importance to this. It knows what sites you visited, what you searched for, where you are, your routines and much more.
 
 <i>"Come on! Google knows where I live and it always knows what's the best route to take home after work, it just makes your life easier, plus it's free!" - Naive average user.</i>
 
