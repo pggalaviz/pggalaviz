@@ -29,7 +29,7 @@ browser? That's idiotic right?
 
 Well, my guess is that it will block all ads but theirs.
 
-This looks unffair to me, they created a browser so they can track your movements, interests and darker
+This looks unffair to me, they created a browser so they can track your movements, interests and darkest
 secrets so they can sell them to the best buyer, and now they want to make it a monopoly?
 
 I once heard (can't remember where and who said it) that if you can use a service for free is
