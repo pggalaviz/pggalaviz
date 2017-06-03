@@ -7,7 +7,7 @@ comments: true
 tags: [personal, privacy]
 ---
 
-For years I've been an avid Google product user: Chrome as my main browser, for development
+For years I've been an avid Google product's user: Chrome as my main browser, for development
 &amp; daily usage, 2 email accounts on Gmail, Google maps for traversing the city, Drive for file
 sharing, and so on. But I'm done! Why? I value my privacy.
 
