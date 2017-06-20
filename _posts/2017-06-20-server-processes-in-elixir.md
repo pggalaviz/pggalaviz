@@ -7,8 +7,8 @@ comments: true
 tags: [elixir]
 ---
 
-Elixir is a functional language, it has built in concurrency based on the actor model and this creates an
-easy way to parallelize work as a result. The main unit for achieving
+Elixir is a functional programming language with built in concurrency based on the actor model, this creates an
+easy way to parallelize work as a side effect. The main unit for achieving
 concurrency are Elixir's processes. These are not OS processes, they are
 lightweight units with separate contexts, they don't share any memory, they run
 isolated from each other, which leads to fault tolerance: if a process crashes
