@@ -357,8 +357,7 @@ the process running continuously. That's why it's important to know how
 bottleneck for our app, but that's something for another post.
 
 You can now start an **iex** session in your terminal with our `todo.exs` file
-and start using our **Server Processes** file and start using our **Server
-Process**.
+and start using our **Server Processes**.
 
 {% highlight elixir %}
 iex todo.exs
