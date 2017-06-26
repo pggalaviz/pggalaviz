@@ -67,58 +67,58 @@ to follow all functional programming workflow.
 ...
 
 defmodule TodoList do
-  # Define a struct, entries will be collected on a Map
-  # A numerical ID will be given to each entry :next
-  defstruct entries: Map.new, next: 1
+  # Define a struct, todos will be collected on a Map
+  # A numerical ID will be given to each todo :next
+  defstruct todos: Map.new, next: 1
 
-  # Each entry will be a Map, this is how it should look:
-  # %{date: {2017, 06, 20}, title: "This is an entry"}
+  # Each todo item will be a Map, this is how it should look:
+  # %{date: {2017, 06, 20}, title: "This is a todo!"}
 
-  # Initialize a new Todo List, a list with entries can be entered
+  # Initialize a new Todo List, a list with todos can be entered
   # defaults to a blank list and adds each element to the struct: %TodoList{}
-  def new(entries \\ []) do
-    Enum.reduce(entries, %TodoList{}, &add_entry(&2, &1))
+  def new(todos \\ []) do
+    Enum.reduce(todos, %TodoList{}, &add_todo(&2, &1))
   end
 
-  # Add a new entry to the list
-  def add_entry(%TodoList{entries: entries, next: next} = todo, entry) do
+  # Add a new item to the list
+  def add_todo(%TodoList{todos: todos, next: next} = list, todo) do
     # Add  the next numerical ID to the entry
-    entry = Map.put(entry, :id, next)
-    new_entries = Map.put(entries, next, entry)
+    todo = Map.put(todo, :id, next)
+    new_todos = Map.put(todos, next, todo)
     # Return updated list and updates next ID number
-    %TodoList{todo | entries: new_entries, next: next + 1}
+    %TodoList{list | todos: new_todos, next: next + 1}
   end
 
-  # Return all entries with specific 'date'
-  def entries(%TodoList{entries: entries}, date) do
-    entries
-    |> Stream.filter(fn({_, entry}) ->
-        entry.date == date
+  # Return all todos with specific 'date'
+  def todos(%TodoList{todos: todos}, date) do
+    todos
+    |> Stream.filter(fn({_, todo}) ->
+        todo.date == date
       end)
-    |> Enum.map(fn({_, entry}) ->
-        entry
+    |> Enum.map(fn({_, todo}) ->
+        todo
       end)
   end
 
-  # Update an existing entry, an ID and updater function is required
-  def update_entry(%TodoList{entries: entries} = todo, entry_id, updater) do
-    case entries[entry_id] do
-      nil -> todo
-      old_entry ->
+  # Update an existing todo, an ID and updater function is required
+  def update_todo(%TodoList{todos: todos} = list, todo_id, updater) do
+    case todos[todo_id] do
+      nil -> list
+      old_todo ->
         # Call the updater function on the entry
-        new_entry =  updater.(old_entry)
+        new_todo =  updater.(old_todo)
         # Update Todo List with the updated entry
-        new_entries = Map.put(entries, new_entry.id, new_entry)
+        new_todos = Map.put(todos, new_todo.id, new_todo)
         # Return updated list
-        %TodoList{todo | entries: new_entries}
+        %TodoList{list | todos: new_todos}
     end
   end
 
-  # Delete a specific entry from list, requires an ID
-  def delete_entry(%TodoList{entries: entries} = todo, entry_id) do
-    new_entries = Map.delete(entries, entry_id)
+  # Delete a specific todo from list, requires an ID
+  def delete_todo(%TodoList{todos: todos} = list, todo_id) do
+    new_todos = Map.delete(todos, todo_id)
     # Return updated list
-    %TodoList{todo | entries: new_entries}
+    %TodoList{list | todos: new_todos}
   end
 end
 {% endhighlight %}
@@ -150,12 +150,12 @@ end
 ...
 {% endhighlight %}
 
-Now let's create the `add_entry` function, this one will send a message to the
-server's mailbox with the following structure: `{:add_entry, entry}`. We can
+Now let's create the `add_todo` function, this one will send a message to the
+server's mailbox with the following structure: `{:add_todo, todo}`. We can
 send a new entry to our previously created server by calling:
 
 {% highlight elixir %}
-iex(1)> TodoServer.add_entry(server_pid, %{date: {2017, 06, 20}, title: "I'm a new
+iex(1)> TodoServer.add_todo(server_pid, %{date: {2017, 06, 20}, title: "I'm a new
 entry!"})
 {% endhighlight %}
 
@@ -165,31 +165,31 @@ The function should look like this:
 # todo.exs
 defmodule TodoServer do
   ...
-  def add_entry(server_pid, entry) do
-    send(server_pid, {:add_entry, entry})
+  def add_todo(server_pid, todo) do
+    send(server_pid, {:add_todo, todo})
   end
 end
 ...
 {% endhighlight %}
 
-In the same way we can create the `update_entry` and the `delete_entry`
+In the same way we can create the `update_todo` and the `delete_todo`
 functions:
 
 {% highlight elixir %}
 # todo.exs
 defmodule TodoServer do
   ...
-  def update_entry(server_pid, entry_id, updater_function) do
-    send(server_pid, {:update_entry, entry_id, updater_function})
+  def update_todo(server_pid, todo_id, updater_function) do
+    send(server_pid, {:update_todo, todo_id, updater_function})
   end
-  def delete_entry(server_pid, entry_id) do
-    send(server_pid, {:delete_entry, entry_id})
+  def delete_todo(server_pid, todo_id) do
+    send(server_pid, {:delete_todo, todo_id})
   end
 end
 ...
 {% endhighlight %}
 
-Notice that to call these we need to pass parameters such as the entry ID or the
+Notice that to call these we need to pass parameters such as the todo ID or the
 updater function.
 
 All these previous functions can help us modify our Todo List instance
@@ -206,7 +206,7 @@ message passing. Lets say process **A** needs a response from server **B**, then
 send **A** another message with the response. While **B** is working, **A** is
 blocked waiting for a response. This is exactly what we'll do.
 
-The `entries` function will return all entries with the same date (passed in the
+The `todos` function will return all entries with the same date (passed in the
 arguments), while the `list` function will return our complete Todo List instance. Both
 functions when called will send a message to the server, however the caller's
 PID (such as IEx's) will be passed via the `self/0` function.
@@ -224,9 +224,9 @@ Functions should look like this:
 # todo.exs
 defmodule TodoServer do
   ...
-  def entries(server_pid, date)
+  def todos(server_pid, date)
     # Here self() returns the PID of the caller
-    send(server_pid, {:entries, self(), date})
+    send(server_pid, {:todos, self(), date})
     receive do
       {:todo_entries, entries} -> entries
     after 5000 ->
@@ -301,7 +301,7 @@ used, making Elixir's processes very cheap to create and use.
 
 Now let's implement the `process_message` function, remember our client
 implementation can send different types of messages, if we want to create an
-entry the `{:add_entry, entry}` message is passed, and if we want the full list
+entry the `{:add_todo, todo}` message is passed, and if we want the full list
 we pass the `{:list, self()}` message. So we need our function to compute what
 we expect according to the message it received, and for this we'll use different
 clauses:
@@ -310,17 +310,17 @@ clauses:
 # todo.exs
 defmodule TodoServer do
   ...
-  defp process_message(todo_list, {:add_entry, new_entry}) do
-    TodoList.add_entry(todo_list, new_entry)
+  defp process_message(todo_list, {:add_todo, new_todo}) do
+    TodoList.add_todo(todo_list, new_todo)
   end
-  defp process_message(todo_list, {:update_entry, id, updater}) do
-    TodoList.update_entry(todo_list, id, updater)
+  defp process_message(todo_list, {:update_todo, id, updater}) do
+    TodoList.update_todo(todo_list, id, updater)
   end
-  defp process_message(todo_list, {:delete_entry, id}) do
-    TodoList.delete_entry(todo_list, id)
+  defp process_message(todo_list, {:delete_todo, id}) do
+    TodoList.delete_todo(todo_list, id)
   end
-  defp process_message(todo_list, {:entries, caller, date}) do
-    send(caller, {:todo_entries, TodoList.entries(todo_list, date)})
+  defp process_message(todo_list, {:todos, caller, date}) do
+    send(caller, {:todo_entries, TodoList.todos(todo_list, date)})
     todo_list
   end
   defp process_message(todo_list, {:list, caller}) do
