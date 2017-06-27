@@ -50,7 +50,8 @@
  * Posts
  */
 .post-header {
-  margin-bottom: $spacing-unit;
+  margin-bottom: 15px;
+  border-bottom: solid 4px $brand-color;
 }
 
 .post-title {
