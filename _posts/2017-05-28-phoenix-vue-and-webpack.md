@@ -304,8 +304,10 @@ new Vue({
 {% highlight html %}
 <!-- components/Hello.vue -->
 <template>
+  <div class="hello">
     <h3>Hello from Vue.js!</h3>
     <p>{% raw %}{{msg}}{% endraw %}</p>
+  </div>
 </template>
 
 <script>
