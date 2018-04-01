@@ -7,9 +7,17 @@
     text-transform:uppercase;
   }
 
-  .rss-subscribe {
+  .tags-link {
+    margin-top: 6px;
     float: right;
     font-size: 11px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border: 1px solid $brand-color;
+    transition: all .3s;
+    &:hover {
+      border-color: $grey-color;
+    }
   }
 
   .post-list {
@@ -18,9 +26,9 @@
 
     > li {
       margin-bottom: 15px;
-      padding-top: 15px;
-      &:not(:first-child) {
-        border-top: 1px solid $grey-color-light;
+      padding-bottom: 15px;
+      &:not(:last-child) {
+        border-bottom: 1px solid $grey-color-light;
       }
     }
   }
@@ -37,7 +45,8 @@
     text-transform: uppercase;
   }
   .index-tags {
-    font-size: 10px;
+    color: $grey-color;
+    font-size: 11px;
     margin-left: 0;
     list-style: none;
     li {

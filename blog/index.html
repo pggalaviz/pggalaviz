@@ -5,7 +5,7 @@ title: Blog
 
 <div id="blog">
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+  <a  class="tags-link" href="{{ "/blog/tags" | prepend: site.baseurl }}">View All Tags</a>
 
   <h1>Blog</h1>
 
@@ -13,7 +13,6 @@ title: Blog
     {% for post in paginator.posts %}
       <li>
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
         <h2>
           <a class="post-link" href="{{ post.url }}">{{ post.title }}</a>
         </h2>
