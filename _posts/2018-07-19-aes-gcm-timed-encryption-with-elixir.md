@@ -7,7 +7,7 @@ comments: true
 tags: [elixir, security]
 ---
 
-While developing elixir web apps sometimes we'll find the necesity of generating
+While developing elixir web apps sometimes we'll find the necessity of generating
 encrypted tokens, these can be used in transactional emails (account confirmation,
 password resets, etc.) or for other purposes. While there are packages out there
 than can help us with this, I wanted to explore more in dept what are the bare options:
