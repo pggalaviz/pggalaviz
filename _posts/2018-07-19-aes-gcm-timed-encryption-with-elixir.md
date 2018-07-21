@@ -26,7 +26,7 @@ others.
 
 For the purpose of this experiment we'll use the AES (Advanced Encryption
 Standard), while for simple experimenting DES could help, it's not considered
-secure. So we'll go the AES in GCM (Galois Counter Mode), you can learn more
+secure. So we'll go the AES in GCM (Galois Counter Mode) way, you can learn more
 about it [here](https://en.wikipedia.org/wiki/Galois/Counter_Mode).
 
 ## The implementation
@@ -52,11 +52,11 @@ end
 {% endhighlight %}
 
 Install it with `mix deps.get` and we're all set to start our
-implememtation.
+implementation.
 
 As we're using symmetric encryption we need a single **key** with which we can encrypt
 and decrypt our messages, AES allows us to use 128, 192 or 256 bits keys, we'll
-create 256 bits keys. Open your **Crypto** module and add the followinf
+create 256 bits keys. Open your **Crypto** module and add the following
 function:
 
 {% highlight elixir %}
@@ -125,17 +125,17 @@ defp block_encrypt(data) do
 end
 {% endhighlight %}
 
-Here we're adding 2 module attibutes, the first one `@key` is getting the key we
-previously set in the app configuration files, the second one `@auth_data` is an
-arbitrary String thats known as AAD (Associated Authenticated Data) and is part
+Here we're adding 2 module attributes, the first one `@key` is getting the key we
+previously set in the configuration files, the second one `@auth_data` is an
+arbitrary String that's known as AAD (Associated Authenticated Data) and is part
 of the AES GCM specification. The AAD has nothing to do with making it "more secure".
 The aim of AAD is to attach information to the ciphertext (the encrypted message)
 that is not encrypted, but is bound to it in the sense that it
 cannot be changed or separated.
 
-Inside the function we're generating a variable `iv` that referst to the
-**Initialization Vector** and it must be always random, according to the GCM
-information, part of the strenght of our encryption depends on it. Here the `iv`
+Inside the function we're generating a variable `iv` that refers to the
+**Initialization Vector** and it must always be random, according to the GCM
+information, part of the strength of our encryption depends on it. Here the `iv`
 is a 128 bits random String.
 
 Then we'll use the **crypto** function **block_encrypt/4**, the first argument
@@ -261,13 +261,13 @@ end
 
 This is our first line of defense, if **Token** is not correctly base 64 encoded
 we can return an error. If decoding takes place then we can pattern match
-against it to split the previoulsy concatenated info. Remember we changed the
+against it to split the previously concatenated info. Remember we changed the
 `cipher_text` and `cipher_tag` order? Well, here's why we did it: the `iv` and
 the `cipher_tag` have a length of 16 while our message String has an arbitrary
 and variable length, so in order to pattern match against it the order is important.
 
-If all goes well we return `{:ok, {iv, cipher_text, cipher_tag}}`, as you can se
-it reverts the order as we had it previously to base 64 encoding.
+If all goes well we return `{:ok, {iv, cipher_text, cipher_tag}}`, as you can
+see it reverts the order as we had it previously to base 64 encoding.
 
 With the decoded payload we can now attempt to decrypt it, lets implement a
 `block_decrypt/1` function:
@@ -289,7 +289,7 @@ This function accepts a tuple which resembles our decoded payload, and then
 it will use Erlang's **crypto** module to decrypt it using **block_decrypt/4**.
 
 If decryption works we'll get a `{:ok, data}` response, where **data** is the
-encrypted message.
+decrypted message.
 
 Now lets implement our `decrypt/1` function:
 
@@ -321,7 +321,7 @@ end
 
 First we attempt to decode the **Token**, then to decrypt it, if this 2 steps
 went well we can now pattern match against the data after we try to split it
-when the "**|**" is found.
+where the "**|**" is found.
 
 If an **expiration** is found first we parse it so we can work with it using
 **Timex**, then we compare the **expiration** to the current time. If the token
@@ -464,7 +464,7 @@ get a `{:error, :expired}` error.
 
 ## Conclusion
 
-This experimet shows us that Elixir has the capacity and tools for using
+This experiment shows us that Elixir has the capacity and tools for using
 encryption thanks to the Erlang/Beam environment.
 
 While this code is probably not production ready, it's been fun to implement,
