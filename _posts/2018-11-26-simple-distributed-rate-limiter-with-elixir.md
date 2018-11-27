@@ -390,7 +390,7 @@ This experiment shows us that Elixir, most times, can help us to get solutions
 without requiring external dependencies or writing an implementation on
 another language.
 
-This rate limiter is obviously very basic and has is caveats, for example if
+This rate limiter is obviously very basic and has its caveats, for example if
 there's a topology change, **Horde** can termiante and restart our **GenServer** and
 **ETS** on another node, losing its state. For basic functionality where
 you can afford to lose state from time to time, this solution can work.
