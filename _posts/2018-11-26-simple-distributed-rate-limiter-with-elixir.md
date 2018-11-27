@@ -50,7 +50,7 @@ processes? Fortunately there are some **hex** packages to help with this:
 <a href="https://github.com/bitwalker/swarm" target="_blank">Swarm</a>,
 which is probably the most famous in the Elixir community, and the newcomer
 <a href="https://github.com/derekkraan/horde" target="_blank">Horde</a> which is
-based on **Swarm** but makes it easier to maintain a separation between a global
+inspired by **Swarm** but makes it easier to maintain a separation between a global
 supervisor from a global registry and is based on delta-CRDTs
 (conflict-free replicated data types).
 
@@ -239,10 +239,10 @@ defmodule Limiter.RateLimiter do
   end
 
   def log(ip) do
-    case Horde.Registry.whereis_name({Limiter.GlobalRegistry, __MODULE__}) do
+    case Horde.Registry.lookup(Limiter.GlobalRegistry, __MODULE__) do
       :undefined ->
         {:error, :not_found}
-      pid ->
+      [{pid, _value}] ->
         node = Kernel.node(pid)
         :rpc.call(node, __MODULE__, :get_log, [ip])
     end
@@ -302,9 +302,8 @@ unique key to identify who is logging to the table, you can use a user's ID or
 an IP address, etc. for our implementation we'll use the IP address.
 
 In this function, first we need to know the PID of our `RateLimiter` process,
-which owns the **ETS** table, for this we can use the `whereis_name/1` function
-provided by **Horde** (at the moment of this writing this function doesn't appear in
-the documentation).
+which owns the **ETS** table, for this we can use the `lookup/2` function
+provided by **Horde**.
 
 If a PID is returned we can make an RPC (Remote Procedure Call) after knowing
 which node from our cluster owns the process.
