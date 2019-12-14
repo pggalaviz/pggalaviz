@@ -4,26 +4,21 @@ title: Blog Tags
 ---
 <div id="tags">
   <h1>Tags</h1>
-  {% capture tags %}
-    {% for tag in site.tags %}
-      {{tag[0]}}
-    {% endfor %}
-  {% endcapture %}
 
-  {% assign sortedtags = tags | split: ' ' | sort %}
+  {% assign sortedtags = site.tags | sort %}
 
   <ul class="tags-all">
   {% for tag in sortedtags %}
-    <li><a href="/blog/tags#{{tag | downcase | slugify }}">{{tag | capitalize }}</a>,</li>
+    <li><a href="/blog/tags#{{tag[0] | downcase | slugify }}">{{tag[0] | capitalize }}</a>,</li>
   {% endfor %}
 </ul>
 
   {% for tag in sortedtags %}
   <section>
-    <div class="tag-hook" id="{{tag | downcase | slugify }}"></div>
-    <h3>{{tag}}</h3>
+    <div class="tag-hook" id="{{tag[0] | downcase | slugify }}"></div>
+    <h3>{{tag[0]}}</h3>
     <ul class="tag">
-      {% for post in site.tags[tag] %}
+      {% for post in tag[1] %}
       <li>
         <p class="date">{{post.date | date: "%b %d, %Y" }}</p>
         <a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a>

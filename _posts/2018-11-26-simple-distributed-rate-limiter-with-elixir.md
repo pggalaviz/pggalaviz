@@ -4,7 +4,7 @@ title:  "Simple distributed rate limiter with Elixir"
 author: Pedro G. Galaviz
 date:   2018-11-26 12:00:00 -0600
 comments: true
-tags: [elixir, distributed systems]
+tags: [elixir, "distributed systems"]
 ---
 
 While developing Elixir web apps you'll find there are some activities or

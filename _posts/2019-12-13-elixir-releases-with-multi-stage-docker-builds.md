@@ -4,7 +4,7 @@ title:  "Elixir releases with multi stage Docker builds"
 author: Pedro G. Galaviz
 date:   2019-12-13 12:00:00 -0600
 comments: true
-tags: [elixir, docker]
+tags: [elixir, docker, phoenix]
 ---
 
 If you've worked with Elixir for the last couple of years, you might be familiar

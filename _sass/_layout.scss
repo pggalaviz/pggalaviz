@@ -1,6 +1,7 @@
-/**
- * Site header
- */
+// ===========
+// Site header
+// ===========
+
 .site-header {
   background-color: #fff;
   width: 100%;
@@ -11,14 +12,19 @@
   left: 0;
 }
 
+.site-header__contents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .site-title {
-  font-family:'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-  font-weight:700;
-  font-size:14px;
-  letter-spacing:1px;
-  text-transform:uppercase;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   line-height: 56px;
-  float: left;
   color: #333 !important;
   &:hover {
     color: #828282 !important;
@@ -26,11 +32,11 @@
 }
 
 .site-nav {
-  float: right;
   line-height: 56px;
 
   .page-link {
     color: #828282;
+    font-size: 14px;
     line-height: $base-line-height;
     transition: all .3s ease;
     // Gaps between nav items, but not on the last one
@@ -48,17 +54,15 @@
         }
       }
     }
-
-
   }
 }
 
-/**
- * Page content
- */
+// ============
+// Page content
+// ============
+
 .page-content {
   padding-top: 66px;
-
 }
 
 .page-heading {
@@ -122,6 +126,21 @@
       > a:focus {
         color: #999;
         cursor: default;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 480px) {
+  .site-title {
+    font-size: 12px;
+  }
+
+  .site-nav {
+    .page-link {
+      font-size: 11px;
+      &:not(:last-child) {
+        margin-right: 9px;
       }
     }
   }
