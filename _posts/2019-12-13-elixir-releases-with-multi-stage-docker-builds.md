@@ -83,9 +83,9 @@ $ mix release.init
 ```
 
 This will generate some files in the `rel` folder (more on these later). Now we
-should configure our relesase, to do this, create a `config/releases.exs` file inside
-the `config` folder, this file an path is the default and will include its own
-runtime configuration. Add the following to this file:
+should configure our release, to do this, create a `config/releases.exs` file,
+this file an path is the default and will include its own runtime configuration.
+Add the following to this file:
 
 ```elixir
 # exrelease/config/releases.exs
