@@ -194,60 +194,68 @@ Add a `Dockerfile` to the root of the project and copy the following:
 # Build Stage
 # ===========
 
-FROM elixir:1.9.4 AS builder
+FROM elixir:1.9 AS builder
 
 # Set environment variables for building the application
 ENV MIX_ENV=prod \
-    TEST=1 \
-    LANG=C.UTF-8
+  LANG=C.UTF-8
 
 # Install Hex and Rebar
 RUN mix local.hex --force && mix local.rebar --force
 
-# Install Node 12.x
-RUN apt-get update
-RUN apt-get -y -q install curl apt-utils
+# Install Node 12.x and other dependencies
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
-RUN apt-get install -y nodejs
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  apt-utils nodejs postgresql-client && \
+  rm -rf /var/lib/apt/lists/*
 
 # Create the app build directory
 RUN mkdir /app
 WORKDIR /app
 
-# Copy over all the necessary application files and directories
+# Fetch and compile Mix dependencies
 COPY config ./config
-COPY lib ./lib
-COPY priv ./priv
-COPY rel ./rel
-COPY assets/package*.json ./assets/
 COPY mix.exs .
 COPY mix.lock .
-
-# Fetch and cache Elixir dependencies
 RUN mix deps.get --only $MIX_ENV
 RUN mix deps.compile
 
-# Fetch Node dependencies and add our assets
-WORKDIR /app/assets
-RUN npm install
-ADD assets ./
-RUN npm run deploy
-
-# Prepare assets for production and build the release
-WORKDIR /app
+# Build assets
+COPY assets ./assets
+RUN cd assets && npm install && npm run deploy
 RUN mix phx.digest
+
+# Build project
+COPY priv ./priv
+COPY lib ./lib
+RUN mix compile
+
+# Build Release
+COPY rel ./rel
 RUN mix release
 
 # =========
 # App Stage
 # =========
 
-FROM debian:stretch AS app
+FROM debian:stretch-slim AS app
 
-ENV LANG=C.UTF-8
+ENV MIX_ENV=prod \
+  LANG=C.UTF-8 \
+  PORT=4000
 
-# Install openssl
-RUN apt-get update && apt-get install -y openssl
+# Exposes port to the host machine
+EXPOSE $PORT
+
+# Set dirs not available in stretch-slim package, needed for postgresql-client
+RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{}
+
+# Install stable dependencies that don't change often
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  postgresql-client openssl && \
+  rm -rf /var/lib/apt/lists/*
 
 # Copy the build artifact from the builder stage and create a non root user
 RUN useradd --create-home app
@@ -271,6 +279,29 @@ image is too), because we have the Erlang Runtime System (ERTS) bundled in the
 release, we don't need Erlang or Elixir anymore in this step. This will allow us
 to have a much smaller image size.
 
+Notice that we also installed `postgresql-client`, a lib needed by `postgrex`,
+so if you intend to use **Ecto**, you'll probably need it.
+
+We should probably add a `.dockerignore` file too:
+
+```shell
+# Git data
+.git
+
+# Elixir build artifacts
+_build
+deps
+
+# Node build artifacts
+assets/node_modules
+
+# Tests
+test
+
+# Compiled static artifacts
+priv/static
+```
+
 With our new `Dockerfile`, go ahead and build the application image by running
 the following from the project's path:
 
@@ -281,15 +312,14 @@ docker build -t exrelease .
 If everything goes well and you run `docker images` you should see something similar to this:
 
 ```shell
-REPOSITORY       TAG            IMAGE ID            CREATED             SIZE
-exrelease        latest         d585f3effd7a        20 seconds ago      193MB
-elixir           1.9.4          69ef33caf2c7        2 days ago          1.08GB
-debian           stretch        5c43e435cc11        3 weeks ago         101MB
+REPOSITORY    TAG              IMAGE ID          CREATED             SIZE
+exrelease     latest           d585f3effd7a      20 seconds ago      140MB
+elixir        1.9.4            69ef33caf2c7      2 days ago          1.08GB
+debian        stretch-slim     5c43e435cc11      3 weeks ago         55.3MB
 ```
 
 As you can see the `elixir` image is over **1 GB** while our application image
-`exrelease` is less than **200 MB** in size. That's a big win from my point of
-view.
+`exrelease` is about **140 MB** in size. That's a big win from my point of view.
 
 Now, lets launch our new container, in your terminal run:
 
