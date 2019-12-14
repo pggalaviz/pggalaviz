@@ -384,6 +384,12 @@ And we're done with our simple rate limiter example, a working app can be found
 in my
 <a href="https://github.com/pggalaviz/limiter" target="_blank">Github</a>.
 
+For a better implementation of a pure **Elixir** rate limiter, check out my
+library
+<a href="https://github.com/pggalaviz/limitex" target="_blank">**Limitex**</a>.
+
+---
+
 ## Conclusion
 
 This experiment shows us that Elixir, most times, can help us to get solutions
