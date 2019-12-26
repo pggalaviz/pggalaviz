@@ -22,6 +22,7 @@ So, a release is a single or multiple OTP applications packed as a standalone
 system which is ready for distribution. On top of that, you can also bundle the
 Erlang Runtime System (ERTS) so your release can run on a target machine without
 the need of an Erlang or Elixir installation.
+
 When you create a release, you should take into account that it must be build in
 a machine that matches the target machine. This means that if I build the release
 on a Linux machine it won't be able to run on a machine with Mac OS or Windows.
@@ -70,7 +71,7 @@ $ mix phx.server
 If everything goes well, you can visit `http://localhost:4000` in your browser
 and you'll find the Phoenix homepage:
 
-![Phoenix screenshot](/assets/img/posts/2019/vanilla_phoenix.png)
+![Phoenix screenshot](/assets/img/posts/2019/phoenix_base.png)
 
 ---
 
