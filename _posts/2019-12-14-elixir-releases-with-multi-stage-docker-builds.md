@@ -98,7 +98,7 @@ app_port = System.fetch_env!("APP_PORT")
 
 config :exrelease, ExreleaseWeb.Endpoint,
   server: true,
-  http: [:inet6, port: String.to_integer(application_port)],
+  http: [:inet6, port: String.to_integer(app_port)],
   secret_key_base: secret_key_base
 ```
 
