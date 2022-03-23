@@ -9,7 +9,7 @@
 title: Pedro G. Galaviz
 email: pedro.g.galaviz@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Music, code & things in between...
+  Life, code & things in between...
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://pggalaviz.com" # the base hostname & protocol for your site
 twitter_username: pggalaviz
